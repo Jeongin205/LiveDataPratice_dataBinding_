@@ -8,7 +8,7 @@ import com.example.livedatapratice.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val firstFragment by lazy { FirstFragment() }
     private val secondFragment by lazy { SecondFragment() }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,15 +17,14 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
         changeFragment(firstFragment)
         findViewById<BottomNavigationView>(R.id.bottomNav).setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.firstfm -> {
                     changeFragment(firstFragment)
                     true
                 }
-                R.id.secondfm ->{
+                R.id.secondfm -> {
                     changeFragment(secondFragment)
                     true
                 }

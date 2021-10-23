@@ -10,23 +10,37 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.livedatapratice.databinding.FragmentFirstBinding
+import com.example.livedatapratice.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
     private lateinit var vm : MainViewModel
+    private var _binding: FragmentSecondBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        val root = binding.root
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-        vm.inputText.observe(viewLifecycleOwner, Observer {
-            view.findViewById<TextView>(R.id.textView).text = vm.inputText.value
-        })
+        binding.data = vm
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }
